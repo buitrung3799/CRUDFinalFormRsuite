@@ -81,8 +81,8 @@ const BookForm = props => {
                         </Field>
                     </div>
                     <ButtonToolbar>
-                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>Submit</Button>
-                        <Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Cancel</Button>
+                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>Add Book</Button>
+                        <Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Reset</Button>
                     </ButtonToolbar>
                     <pre>{JSON.stringify(values,0,2)}</pre>
                 </Rform>

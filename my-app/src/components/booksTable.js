@@ -48,8 +48,8 @@ function BooksTable(props) {
                     {rowData => {
                         return (
                             <span>
-                                <a onClick={() => props.toggleEdit(rowData)}> Edit </a> |{' '}
-                                <a onClick={() => props.deleteBook(rowData.id)}> Remove </a>
+                                <a onClick={() => props.toggleEdit(rowData)} style={{cursor: 'pointer'}}> Edit </a> |{' '}
+                                <a onClick={() => props.deleteBook(rowData.id)} style={{cursor: 'pointer'}} > Remove </a>
                             </span>
                         );
                     } }

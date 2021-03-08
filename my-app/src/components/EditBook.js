@@ -21,8 +21,8 @@ const EditBook = props => {
         }
         return errors;
     };
-    const handleSubmit = () => {
-        props.updateBook(book.id , book)
+    const handleSubmit = e => {
+        e.preventDefault();
     }
     return (
         <Form 
@@ -30,7 +30,7 @@ const EditBook = props => {
         initialValues = {book}
         validate={validate}
         render={({
-            handleSubmit , submitting , values , pristine, form }) => (
+            handleSubmit , submitting , values , pristine }) => (
                 <Rform model={model} onSubmit={handleSubmit}>
                     <div style={{margin:'1rem auto'}}>
                         <Field name="name">
@@ -77,7 +77,7 @@ const EditBook = props => {
                         </Field>
                     </div>
                     <ButtonToolbar>
-                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>Submit</Button>
+                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>Edit Book</Button>
                         <Button appearance="default" onClick={() => props.setEditing(false)}>Cancel</Button>
                     </ButtonToolbar>
                     <pre>{JSON.stringify(values,0,2)}</pre>

@@ -44,13 +44,9 @@ function App() {
     <div className="App">
       <Container>
         <Header>
-            <Navbar appearance="inverse">
-              <Navbar.Header>
-              <h1 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h1>
-              </Navbar.Header>
-            </Navbar>
+            <h1 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h1>
         </Header>
-        <Content>
+        <Content style={{margin:'1rem auto'}}>
           <FlexboxGrid justify='space-around' align='top'>
             <FlexboxGrid.Item colspan={10}>
               {

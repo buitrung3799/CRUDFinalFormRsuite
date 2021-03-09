@@ -66,7 +66,7 @@ const BookForm = props => {
                     <div className="buttons">
                     <ButtonToolbar>
                         <Button appearance="primary" type="submit" disabled={submitting || pristine}>{props.editing ? 'Edit Book' : 'Add Book'}</Button>
-                        <Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Reset</Button>
+                      {props.editing ? (<Button appearance="default" onClick={() => props.setEditing(false)}>Cancel</Button>) : (<Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Reset</Button>)}  
                     </ButtonToolbar>
                     </div>
                     <pre>{JSON.stringify(values,0,2)}</pre>

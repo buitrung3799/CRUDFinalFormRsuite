@@ -1,92 +1,70 @@
 import { Form , Field} from 'react-final-form';
 import React from 'react';
-import {Form as Rform , FormGroup, FormControl, ControlLabel, HelpBlock , ButtonToolbar , Button , Schema } from 'rsuite';
-const {StringType , NumberType} = Schema.Types;
-const model = Schema.Model({
-    name: StringType().isRequired('This field is required'),
-    price: NumberType().isRequired('This field is required'),
-});
+import {Form as Rform , ControlLabel , ButtonToolbar , Button , Input } from 'rsuite';
+const TextFieldAdapter = ({input , meta , ...rest}) => (
+    <Input {...input} {...rest} onChange = {value => input.onChange(value)}
+    errorText={meta.touched ? meta.error : ""} />
+)
 const BookForm = props => {
     const initialFormState = {id: '' , name: '' , category: '' , price: '', author:''}
     const [book , setBook] = React.useState(initialFormState);
-    const handleSubmit = e => {
-        e.preventDefault();
-        if(!book.name || !book.category || !book.price) return 
-        props.addBook(book);
+    const onSubmit = values => {
+        if(!values.name || !values.category || !values.price) return 
+        props.addBook(values);
         setBook(initialFormState);
-    }
-    const validate = values => {
-        const errors = {};
-        if(!values.name) {
-            errors.name = 'Required';
-        }
-        if(!values.bookcategory) {
-            errors.category = 'Required';
-        }
-        if(!values.bookprice) {
-            errors.price = 'Required';
-        }
-        return errors;
-    };
+      }
+    const validate = values => (
+        values ? undefined : 'Required'
+    );
     return (
         <Form 
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         initialValues = {book}
         validate={validate}
         render={({
-            handleSubmit , submitting , values , pristine, form }) => (
-                <Rform model={model} onSubmit={handleSubmit}>
+            handleSubmit , submitting , values , pristine, form }) => {
+                console.log(values);
+                console.log(submitting);
+                console.log(form);
+                return (
+                <Rform onSubmit={handleSubmit}>
                     <div style={{margin:'1rem auto'}}>
-                        <Field name="name">
-                        {({input , meta}) => (
-                            <FormGroup > 
-                            <ControlLabel>Book Name</ControlLabel>
-                            <FormControl name='name' {...input}></FormControl>
-                            {meta.error && meta.touched && <HelpBlock>{meta.error}</HelpBlock>}
-                            </FormGroup>
-                        )}
+                    <ControlLabel>Book Name</ControlLabel>
+                        <Field name="name" 
+                        component={TextFieldAdapter}
+                        validate={validate}>
                         </Field>
                     </div>
                     <div style={{margin:'1rem auto'}}>
-                        <Field name="category">
-                        {({input , meta}) => (
-                            <FormGroup> 
-                            <ControlLabel>Book Category</ControlLabel>
-                            <FormControl name='category' {...input}></FormControl>
-                            {meta.error && meta.touched && <HelpBlock>{meta.error}</HelpBlock>}
-                            </FormGroup>
-                        )}
+                    <ControlLabel>Book Category</ControlLabel>
+                        <Field name="category"
+                        component={TextFieldAdapter}
+                        validate={validate}>
                         </Field>
                     </div>
                     <div style={{margin:'1rem auto'}}>
-                        <Field name="price" >
-                        {({input , meta}) => (
-                            <FormGroup> 
-                            <ControlLabel>Book Price</ControlLabel>
-                            <FormControl name='price' {...input}></FormControl>
-                            {meta.error && meta.touched && <HelpBlock>{meta.error}</HelpBlock>}
-                            </FormGroup>
-                        )}
+                    <ControlLabel>Book Price</ControlLabel>
+                        <Field name="price" 
+                        component={TextFieldAdapter}
+                        validate={validate}>
                         </Field>
                     </div>
                     <div style={{margin:'1rem auto'}}>
-                        <Field name="author" >
-                        {({input , meta}) => (
-                            <FormGroup> 
-                            <ControlLabel>Book Author</ControlLabel>
-                            <FormControl name='author' {...input}></FormControl>
-                            {meta.error && meta.touched && <HelpBlock>{meta.error}</HelpBlock>}
-                            </FormGroup>
-                        )}
+                    <ControlLabel>Book Author</ControlLabel>
+                        <Field name="author" 
+                        component={TextFieldAdapter}
+                        validate={validate}>
                         </Field>
                     </div>
+                    <div className="buttons">
                     <ButtonToolbar>
                         <Button appearance="primary" type="submit" disabled={submitting || pristine}>Add Book</Button>
                         <Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Reset</Button>
                     </ButtonToolbar>
+                    </div>
                     <pre>{JSON.stringify(values,0,2)}</pre>
                 </Rform>
-            ) 
+            )}
         }
         />
         )

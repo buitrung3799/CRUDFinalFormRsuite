@@ -1,7 +1,6 @@
 import './App.css';
 import React , { useState } from 'react';
 import {Container  , Header , Content} from 'rsuite';
-import {Navbar} from 'rsuite';
 import {FlexboxGrid} from 'rsuite';
 import BooksTable from './components/booksTable';
 import 'rsuite/dist/styles/rsuite-default.css';
@@ -35,8 +34,8 @@ function App() {
         book.id === id ? updatedBook : book)
       ))
     }
-    const searchSpace = e => {
-      let keyword = e.target.value;
+    const searchSpace = value => {
+      let keyword = value;
       setSearch(keyword);
       console.log(keyword)
     }
@@ -44,7 +43,7 @@ function App() {
     <div className="App">
       <Container>
         <Header>
-            <h1 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h1>
+            <h2 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h2>
         </Header>
         <Content style={{margin:'1rem auto'}}>
           <FlexboxGrid justify='space-around' align='top'>
@@ -52,19 +51,19 @@ function App() {
               {
                 editing ? (
                   <>
-                  <h1>Edit Book Form</h1>
+                  <h2>Edit Book Form</h2>
                   <EditBook currentBook={currentBook} updateBook={updateBook} setEditing={setEditing} />
                   </>
                 ) : (
                   <>
-                  <h1>Add Book Form</h1>
+                  <h2>Add Book Form</h2>
                   <BookForm addBook={addBook} />
                 </>
                 )
               }
             </FlexboxGrid.Item>
-            <FlexboxGrid.Item colspan={10}>
-              <h1>View Books</h1>
+            <FlexboxGrid.Item colspan={13}>
+              <h2>View Books</h2>
               <BooksTable books={books} deleteBook={deleteBook} toggleEdit={toggleEdit} searchSpace={searchSpace} search={search}/>
             </FlexboxGrid.Item>
             </FlexboxGrid>

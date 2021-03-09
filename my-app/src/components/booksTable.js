@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Table , InputGroup , Icon } from 'rsuite';
+import { Table , InputGroup , Icon , Input } from 'rsuite';
 
 function BooksTable(props) {
     const items = props.books.filter((book) => {
@@ -13,8 +13,9 @@ function BooksTable(props) {
     })
     return (
         <>
-        <InputGroup size="lg">
-        <input id='search-bar' type='text' placeholder='Search...' onChange={e => props.searchSpace(e)} style={{width:600 , border:'none' , outline: 'none'}} />
+        <InputGroup size="lg" style={{margin:'2.2rem auto'}}>
+
+            <Input onChange={value => props.searchSpace(value)} style={{width: 600 , border:'none' , outline: 'none' , margin: 'auto'}} placeholder='Search...' />
             <InputGroup.Addon>
                 <Icon icon="search" />
             </InputGroup.Addon>

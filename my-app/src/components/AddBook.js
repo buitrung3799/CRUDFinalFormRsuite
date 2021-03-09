@@ -8,25 +8,18 @@ const TextFieldAdapter = ({input , meta , ...rest}) => (
 const BookForm = props => {
     const initialFormState = {id: '' , name: '' , category: '' , price: '', author:''}
     const [book , setBook] = React.useState(initialFormState);
-    const [currentBook , setCurrentBook] = React.useState(props.currentBook);
     const onSubmit = values => {
         if(!values.name || !values.category || !values.price) return 
         props.addBook(values);
         setBook(initialFormState);
       }
-    const onSubmitEdit = values => {
-        window.alert(JSON.stringify(values , 0 ,2));
-        props.updateBook(values.id , values)
-    }
     const validate = values => (
         values ? undefined : 'Required'
     );
     return (
-        <>
-        <h2>{props.editing ? 'Edit Book Form' : 'Add Book'}</h2>
         <Form 
-        onSubmit={props.editing ? onSubmitEdit : onSubmit}
-        initialValues = {props.editing ? currentBook : book}
+        onSubmit={onSubmit}
+        initialValues = {book}
         validate={validate}
         render={({
             handleSubmit , submitting , values , pristine, form }) => {
@@ -65,7 +58,7 @@ const BookForm = props => {
                     </div>
                     <div className="buttons">
                     <ButtonToolbar>
-                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>{props.editing ? 'Edit Book' : 'Add Book'}</Button>
+                        <Button appearance="primary" type="submit" disabled={submitting || pristine}>Add Book</Button>
                         <Button appearance="default" onClick={form.reset} disabled={submitting || pristine}>Reset</Button>
                     </ButtonToolbar>
                     </div>
@@ -74,7 +67,6 @@ const BookForm = props => {
             )}
         }
         />
-        </>
         )
     }
     export default BookForm;

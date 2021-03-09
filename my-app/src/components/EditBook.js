@@ -1,17 +1,13 @@
 import React from 'react';
 import { Form , Field} from 'react-final-form';
-import {Form as Rform , ControlLabel, Input, ButtonToolbar , Button , Schema } from 'rsuite';
-const {StringType , NumberType} = Schema.Types;
-const model = Schema.Model({
-    name: StringType().isRequired('This field is required'),
-    price: NumberType().isRequired('This field is required'),
-});
+import {Form as Rform , ControlLabel, Input, ButtonToolbar , Button  } from 'rsuite';
+
 const TextFieldAdapter = ({input , meta , ...rest}) => (
     <Input {...input} {...rest} onChange = {value => input.onChange(value)}
     errorText={meta.touched ? meta.error : ""} />
 )
 const EditBook = props => {
-    const [book , setBook] = React.useState(props.currentBook);
+    const [currentBook , setCurrentBook] = React.useState(props.currentBook);
     const validate = values => (
         values ? undefined : 'Required'
     );
@@ -22,11 +18,11 @@ const EditBook = props => {
     return (
         <Form 
         onSubmit={onSubmit}
-        initialValues = {book}
+        initialValues = {currentBook}
         validate={validate}
         render={({
             handleSubmit , values , form}) => (
-                <Rform model={model} onSubmit={handleSubmit}>
+                <Rform onSubmit={handleSubmit}>
                     <div style={{margin:'1rem auto'}}>
                     <ControlLabel>Book Name</ControlLabel>
                         <Field name="name" component={TextFieldAdapter}

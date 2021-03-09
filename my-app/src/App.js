@@ -5,7 +5,6 @@ import {FlexboxGrid} from 'rsuite';
 import BooksTable from './components/booksTable';
 import 'rsuite/dist/styles/rsuite-default.css';
 import BookForm from './components/BookForm';
-import EditBook from './components/EditBook';
 function App() {
   const booksData = [
     {id: 1 , name: 'Doraemon' , category: 'Comic' , price: '10' , author: 'Trung'},
@@ -48,19 +47,7 @@ function App() {
         <Content style={{margin:'1rem auto'}}>
           <FlexboxGrid justify='space-around' align='top'>
             <FlexboxGrid.Item colspan={10}>
-              {
-                editing ? (
-                  <>
-                  <h2>Edit Book Form</h2>
-                  <EditBook currentBook={currentBook} updateBook={updateBook} setEditing={setEditing} />
-                  </>
-                ) : (
-                  <>
-                  <h2>Add Book Form</h2>
-                  <BookForm addBook={addBook} />
-                </>
-                )
-              }
+              <BookForm  currentBook={currentBook} updateBook={updateBook} setEditing={setEditing} addBook={addBook} editing={editing} />
             </FlexboxGrid.Item>
             <FlexboxGrid.Item colspan={13}>
               <h2>View Books</h2>

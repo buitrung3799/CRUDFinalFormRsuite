@@ -19,7 +19,7 @@ function App() {
     const onSubmit = values => {
         if(!values.name || !values.category || !values.price) return 
         addBook(values);
-        setBook(initialFormState);
+        setBook(values);
       }
     const onSubmitEdit = values => {
         updateBook(values.id , values)

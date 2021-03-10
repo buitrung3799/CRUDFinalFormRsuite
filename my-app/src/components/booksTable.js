@@ -14,7 +14,6 @@ function BooksTable(props) {
     return (
         <>
         <InputGroup size="lg" style={{margin:'2.2rem auto'}}>
-
             <Input onChange={value => props.searchSpace(value)} style={{width: 600 , border:'none' , outline: 'none' , margin: 'auto'}} placeholder='Search...' />
             <InputGroup.Addon>
                 <Icon icon="search" />

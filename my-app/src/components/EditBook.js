@@ -13,7 +13,7 @@ const EditBook = props => {
     );
     const onSubmit = values => {
         window.alert(JSON.stringify(values , 0 ,2));
-        props.updateBook(values.id , values)
+        props.updateBook(values.id , values);
     }
     return (
         <Form 
@@ -25,14 +25,16 @@ const EditBook = props => {
                 <Rform onSubmit={handleSubmit}>
                     <div style={{margin:'1rem auto'}}>
                     <ControlLabel>Book Name</ControlLabel>
-                        <Field name="name" component={TextFieldAdapter}
+                        <Field name="name" 
+                        component={TextFieldAdapter}
                         validate={validate}>
                         
                         </Field>
                     </div>
                     <div style={{margin:'1rem auto'}}>
                     <ControlLabel>Book Category</ControlLabel>
-                        <Field name="category" component={TextFieldAdapter}
+                        <Field name="category" 
+                        component={TextFieldAdapter}
                         validate={validate}>
                         
                         </Field>
@@ -41,10 +43,7 @@ const EditBook = props => {
                     <ControlLabel>Book Price</ControlLabel>
                         <Field name="price"
                          component={TextFieldAdapter}
-                        
-                        validate={validate}
-                        
-                        />
+                         validate={validate}/>
                     </div>
                     <div style={{margin:'1rem auto'}}>
                     <ControlLabel>Book Author</ControlLabel>

@@ -6,18 +6,6 @@ const TextFieldAdapter = ({input , meta , ...rest}) => (
     errorText={meta.touched ? meta.error : ""} />
 )
 const BookForm = props => {
-    const initialFormState = {id: '' , name: '' , category: '' , price: '', author:''}
-    const [book , setBook] = React.useState(initialFormState);
-    const [currentBook , setCurrentBook] = React.useState(props.currentBook);
-    const onSubmit = values => {
-        if(!values.name || !values.category || !values.price) return 
-        props.addBook(values);
-        setBook(initialFormState);
-      }
-    const onSubmitEdit = values => {
-        window.alert(JSON.stringify(values , 0 ,2));
-        props.updateBook(values.id , values)
-    }
     const validate = values => (
         values ? undefined : 'Required'
     );
@@ -25,11 +13,10 @@ const BookForm = props => {
         <>
         <h2>{props.editing ? 'Edit Book Form' : 'Add Book'}</h2>
         <Form 
-        onSubmit={props.editing ? onSubmitEdit : onSubmit}
-        initialValues = {props.editing ? currentBook : book}
-        validate={validate}
-        render={({
-            handleSubmit , submitting , values , pristine, form }) => {
+            onSubmit={props.onSubmit}
+            initialValues = {props.book}
+            validate={validate}
+            render={({ handleSubmit , submitting , values , pristine, form }) => {
                 console.log(values);
                 console.log(submitting);
                 console.log(form);
@@ -59,8 +46,8 @@ const BookForm = props => {
                     <div style={{margin:'1rem auto'}}>
                     <ControlLabel>Book Author</ControlLabel>
                         <Field name="author" 
-                        component={TextFieldAdapter}
-                        validate={validate}>
+                            component={TextFieldAdapter}
+                            validate={validate}>
                         </Field>
                     </div>
                     <div className="buttons">

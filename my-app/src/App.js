@@ -15,6 +15,15 @@ function App() {
     const initialFormState = {id: null , name: '' , category:'' , price: '' , author:''};
     const [currentBook , setCurrentBook] = useState(initialFormState);
     const [search , setSearch] = useState(null);
+    const [bookAdd , setBook] = React.useState(initialFormState);
+    const onSubmit = values => {
+        if(!values.name || !values.category || !values.price) return 
+        addBook(values);
+        setBook(initialFormState);
+      }
+    const onSubmitEdit = values => {
+        updateBook(values.id , values)
+    }
     const addBook = book => {
       if(books.length !== 0 ) {
         book.id = books[books.length-1].id + 1;
@@ -48,12 +57,15 @@ function App() {
     <div className="App">
       <Container>
         <Header>
-            <h2 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h2>
+          <h2 style={{textAlign: 'center'}}>CRUD App with <span style={{color: '#297DB9'}}>R<span style={{color:'#B92966'}}>SUITE</span></span> and <span style={{color: '#E2D01B'}}>Final Form</span></h2>
         </Header>
         <Content style={{margin:'1rem auto'}}>
           <FlexboxGrid justify='space-around' align='top'>
             <FlexboxGrid.Item colspan={10}>
-              <BookForm  currentBook={currentBook} updateBook={updateBook} setEditing={setEditing} addBook={addBook} editing={editing} />
+              {
+                editing ? <BookForm  book={currentBook}  setEditing={setEditing} onSubmit={onSubmitEdit} editing={editing} /> :
+                <BookForm  book={bookAdd} setEditing={setEditing} onSubmit={onSubmit} editing={editing} />
+              }
             </FlexboxGrid.Item>
             <FlexboxGrid.Item colspan={13}>
               <h2>View Books</h2>

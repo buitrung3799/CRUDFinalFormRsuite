@@ -16,8 +16,14 @@ function App() {
     const [currentBook , setCurrentBook] = useState(initialFormState);
     const [search , setSearch] = useState(null);
     const addBook = book => {
-      book.id = books[books.length-1].id + 1;
-      setBooks([...books , book]);
+      if(books.length !== 0 ) {
+        book.id = books[books.length-1].id + 1;
+        setBooks([...books , book]);
+      }
+      if(books.length === 0 ) {
+        book.id = books.length + 1;
+        setBooks([...books , book]);
+      }
     }
     const deleteBook = id => {
       setBooks(books.filter(book => book.id !== id));
